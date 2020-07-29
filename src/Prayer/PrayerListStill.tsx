@@ -1,8 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { TPrayerList } from "../types";
 import { FaSun } from "react-icons/fa";
 
-const PrayerListStill = ({ prayers, currentPrayer }) => {
+const PrayerListStill = ({ prayers }: TPrayerList) => {
   return (
     <div className="row" id="times">
       {prayers.map((prayer, index) => {
@@ -24,10 +24,6 @@ const PrayerListStill = ({ prayers, currentPrayer }) => {
       })}
     </div>
   );
-};
-
-PrayerListStill.propTypes = {
-  prayers: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default PrayerListStill;

@@ -1,8 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { TPrayerList } from "../types";
 import Prayer from "./Prayer";
 
-const PrayerList = ({ prayers, currentPrayer }) => {
+const PrayerList = ({ prayers, currentPrayer }: TPrayerList) => {
   return (
     <div className="row" id="times">
       {prayers.map((prayer, index) => {
@@ -30,17 +30,12 @@ const PrayerList = ({ prayers, currentPrayer }) => {
             prayer={prayer}
             current={isCur}
             index={index}
-            key={prayer.id}
+            key={index}
           />
         );
       })}
     </div>
   );
-};
-
-PrayerList.propTypes = {
-  prayers: PropTypes.arrayOf(PropTypes.object).isRequired,
-  currentPrayer: PropTypes.number,
 };
 
 export default PrayerList;

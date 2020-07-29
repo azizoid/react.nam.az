@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 
 import NavBar from "./Prayer/NavBar";
-// import Ramadan from "./Prayer/Ramadan";
 
 import Location from "./Prayer/Location";
 import Progress from "./Prayer/Progress";
 import PrayerList from "./Prayer/PrayerList";
 import PrayerListStill from "./Prayer/PrayerListStill";
 import Ayah from "./Prayer/Ayah";
-// import Dua from "./Prayer/Dua";
 
 import {
   format,
@@ -19,38 +17,9 @@ import {
 } from "date-fns";
 import { az } from "date-fns/locale";
 
-const App = () => {
-  const cities = [
-    "Haradasınız?",
-    "Bakı",
-    "Sumqayıt",
-    "Gəncə",
-    "Lənkaran",
-    "Mingəçevir",
-    "Naxçıvan",
-    "Ağdam",
-    "Astara",
-    "Beyləqan",
-    "Cəlilabad",
-    "Göyçay",
-    "Qəbələ",
-    "Qazax",
-    "Quba",
-    "Qusar",
-    "Saatlı",
-    "Sabirabad",
-    "Şamaxı",
-    "Şəki",
-    "Şirvan",
-    "Xaçmaz",
-    "Yevlax",
-    "Zaqatala",
-    "Xankəndi",
-    "Marneuli",
-    "Bolnisi",
-    // "Ərdəbil",
-  ];
+import { cities } from "./cities";
 
+const App = () => {
   const [prayers, setPrayers] = useState([
     { id: 1, title: "Fəcr namazı", time: "--:--", rakat: 2 },
     { id: 2, title: "Günəş", time: "-:-", rakat: 0 },
@@ -64,18 +33,19 @@ const App = () => {
     currentPrayer: -1,
     nowis: format(new Date(), "HH:mm"),
     tarix: format(new Date(), "EEEE, d MMMM yyyy", { locale: az }),
+    hijri: "",
     today: getDayOfYear(new Date()),
     prayerLoader: 1,
-    ramadan: 0,
+    progress: 0,
   });
 
   const [city, setCity] = useState(
-    JSON.parse(localStorage.getItem("city")) || 1
+    JSON.parse(localStorage.getItem("city") as string) || 1
   );
-  const [dd, setDd] = useState(parseInt(pref.today));
+  const [dd, setDd] = useState(pref.today);
 
   useEffect(() => {
-    let tmpCity = JSON.parse(localStorage.getItem("city")) || 1;
+    let tmpCity = JSON.parse(localStorage.getItem("city") as string) || 1;
     if (tmpCity) {
       setCity(tmpCity);
     }
@@ -89,7 +59,7 @@ const App = () => {
         let currentPrayer = 5;
         const newDate = new Date();
 
-        const tmpPrayers = prayers.map((prayer, i) => {
+        const tmpPrayers = prayers.map((prayer: any, i) => {
           prayer["time"] = data.prayers[i];
           prayer["ago"] = formatDistanceStrict(
             newDate,
@@ -128,7 +98,7 @@ const App = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [city, dd]);
 
-  const per = (curr, prayers, nowis) => {
+  const per = (curr: number, prayers: any, nowis: string) => {
     const tmpDate = new Date();
     const untillNow = differenceInSeconds(
       parse(nowis, "HH:mm", tmpDate),
@@ -152,7 +122,7 @@ const App = () => {
     return Math.abs(Math.floor((untillNow * 100) / untillNext));
   };
 
-  const changeCity = (v) => {
+  const changeCity = (v: number) => {
     if (!(v in cities)) v = 0;
 
     if (v !== 0) {
@@ -161,20 +131,20 @@ const App = () => {
       setPref((prev) => {
         return { ...prev, location: cities[v] };
       });
-      setCity(parseInt(v));
+      setCity(v);
     }
   };
 
-  const changeDd = (v) => {
+  const changeDd = (v: number) => {
     setPref((prev) => {
       return { ...prev, tarix: prev.tarix };
     });
-    setDd(parseInt(v));
+    setDd(v);
   };
 
   return (
     <div>
-      <NavBar changeCity={changeCity} cities={cities} city={city} />
+      <NavBar changeCity={changeCity} city={city} />
 
       <div className="container">
         <Location

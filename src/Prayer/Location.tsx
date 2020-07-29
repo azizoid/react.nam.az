@@ -1,9 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
-import Clock from "./Clock";
+import { TLocation } from "../types";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-const Location = ({ location, tarix, hijri, dd, changeDd }) => {
+import Clock from "./Clock";
+
+const Location = ({ location, tarix, hijri, dd, changeDd }: TLocation) => {
   return (
     <div className="d-flex align-items-center justify-content-center">
       <button
@@ -15,7 +16,7 @@ const Location = ({ location, tarix, hijri, dd, changeDd }) => {
       </button>
       <div className="text-center col-md-5" id="location">
         <h1 className="nowis d-none d-md-block">
-          <Clock />
+          <Clock time="" />
         </h1>
         <h1>{location}</h1>
         <small>{tarix}</small>
@@ -31,14 +32,6 @@ const Location = ({ location, tarix, hijri, dd, changeDd }) => {
       </button>
     </div>
   );
-};
-
-Location.propTypes = {
-  location: PropTypes.string.isRequired,
-  tarix: PropTypes.string,
-  hijri: PropTypes.string,
-  dd: PropTypes.number.isRequired,
-  changeDd: PropTypes.func,
 };
 
 export default Location;

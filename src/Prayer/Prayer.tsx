@@ -1,8 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { TPrayer } from "../types";
 import { FaSun } from "react-icons/fa";
 
-const Prayer = ({ prayer, classes, current, index }) => {
+const Prayer = ({ prayer, classes, current, index }: TPrayer) => {
   return (
     <div className={classes}>
       <div className="row">
@@ -31,13 +31,6 @@ const Prayer = ({ prayer, classes, current, index }) => {
       </div>
     </div>
   );
-};
-
-Prayer.propTypes = {
-  prayer: PropTypes.object.isRequired,
-  classes: PropTypes.string,
-  current: PropTypes.bool,
-  index: PropTypes.number,
 };
 
 export default Prayer;

@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
+import { TClock, TClockState } from "../types";
 
-class Clock extends Component {
-  constructor(props) {
+class Clock extends React.Component<TClock, TClockState> {
+  constructor(props: TClock) {
     super(props);
     this.state = {
       time: new Date().toLocaleTimeString("az", {
@@ -10,6 +11,8 @@ class Clock extends Component {
       }),
     };
   }
+  private intervalID: any;
+
   componentDidMount() {
     this.intervalID = setInterval(() => this.tick(), 1000);
   }

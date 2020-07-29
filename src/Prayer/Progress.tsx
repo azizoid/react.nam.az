@@ -1,7 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { TProgress } from "../types";
 
-const Progress = ({ bar }) => {
+const Progress = ({ bar }: TProgress) => {
   const classes = ["progress-bar"];
   if (bar > 75) {
     classes.push("bg-danger");
@@ -15,15 +15,11 @@ const Progress = ({ bar }) => {
         role="progressbar"
         style={{ width: bar + "%" }}
         aria-valuenow={bar}
-        aria-valuemin="0"
-        aria-valuemax="100"
+        aria-valuemin={0}
+        aria-valuemax={100}
       ></div>
     </div>
   );
-};
-
-Progress.propTypes = {
-  bar: PropTypes.number,
 };
 
 export default Progress;

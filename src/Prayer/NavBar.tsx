@@ -1,7 +1,9 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { TNavBar } from "../types";
 
-const NavBar = ({ changeCity, cities, city }) => {
+import { cities } from "../cities";
+
+const NavBar = ({ changeCity, city }: TNavBar) => {
   return (
     <nav className="navbar sticky-top navbar-expand-lg navbar-light bg-light">
       <div className="container">
@@ -38,12 +40,6 @@ const NavBar = ({ changeCity, cities, city }) => {
       </div>
     </nav>
   );
-};
-
-NavBar.propTypes = {
-  changeCity: PropTypes.func,
-  cities: PropTypes.array,
-  city: PropTypes.number,
 };
 
 export default NavBar;
