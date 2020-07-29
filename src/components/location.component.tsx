@@ -1,8 +1,8 @@
 import React from "react";
-import { TLocation } from "../types";
+import { TLocation } from "../assist/types";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-import Clock from "./Clock";
+import Clock from "./clock.component";
 
 const Location = ({ location, tarix, hijri, dd, changeDd }: TLocation) => {
   return (

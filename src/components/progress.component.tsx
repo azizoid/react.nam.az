@@ -1,5 +1,5 @@
 import React from "react";
-import { TProgress } from "../types";
+import { TProgress } from "../assist/types";
 
 const Progress = ({ bar }: TProgress) => {
   const classes = ["progress-bar"];

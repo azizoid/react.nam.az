@@ -1,5 +1,5 @@
 import React from "react";
-import { TPrayer } from "../types";
+import { TPrayer } from "../assist/types";
 import { FaSun } from "react-icons/fa";
 
 const Prayer = ({ prayer, classes, current, index }: TPrayer) => {

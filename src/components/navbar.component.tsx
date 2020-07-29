@@ -1,7 +1,7 @@
 import React from "react";
-import { TNavBar } from "../types";
+import { TNavBar } from "../assist/types";
 
-import { cities } from "../cities";
+import { cities } from "../assist/cities";
 
 const NavBar = ({ changeCity, city }: TNavBar) => {
   return (

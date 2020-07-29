@@ -1,5 +1,5 @@
 import React from "react";
-import { TClock, TClockState } from "../types";
+import { TClock, TClockState } from "../assist/types";
 
 class Clock extends React.Component<TClock, TClockState> {
   constructor(props: TClock) {

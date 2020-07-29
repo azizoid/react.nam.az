@@ -1,5 +1,5 @@
 import React from "react";
-import { TPrayerList } from "../types";
+import { TPrayerList } from "../assist/types";
 import { FaSun } from "react-icons/fa";
 
 const PrayerListStill = ({ prayers }: TPrayerList) => {

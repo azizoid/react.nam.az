@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Loader from "./Loader";
+import Loader from "./loader.component";
 import { FaQuoteLeft } from "react-icons/fa";
 
 const Ayah = () => {

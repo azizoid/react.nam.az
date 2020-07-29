@@ -1,6 +1,6 @@
 import React from "react";
-import { TPrayerList } from "../types";
-import Prayer from "./Prayer";
+import { TPrayerList } from "../assist/types";
+import Prayer from "./prayer.component";
 
 const PrayerList = ({ prayers, currentPrayer }: TPrayerList) => {
   return (

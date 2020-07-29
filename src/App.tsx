@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-import NavBar from "./Prayer/NavBar";
+import NavBar from "./components/navbar.component";
 
-import Location from "./Prayer/Location";
-import Progress from "./Prayer/Progress";
-import PrayerList from "./Prayer/PrayerList";
-import PrayerListStill from "./Prayer/PrayerListStill";
-import Ayah from "./Prayer/Ayah";
+import Location from "./components/location.component";
+import Progress from "./components/progress.component";
+import PrayerList from "./components/prayerlist.component";
+import PrayerListStill from "./components/prayerliststill.component";
+import Ayah from "./components/ayah.component";
 
 import {
   format,
@@ -17,7 +17,7 @@ import {
 } from "date-fns";
 import { az } from "date-fns/locale";
 
-import { cities } from "./cities";
+import { cities } from "./assist/cities";
 
 const App = () => {
   const [prayers, setPrayers] = useState([
