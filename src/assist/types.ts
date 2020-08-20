@@ -27,9 +27,7 @@ export type TLocation = {
   changeDd: (dd: number) => void;
 };
 
-export type TClock = {
-  time: string;
-};
+export type TClock = {};
 
 export type TClockState = {
   time: string;

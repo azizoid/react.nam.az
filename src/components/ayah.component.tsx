@@ -4,7 +4,7 @@ import { FaQuoteLeft } from "react-icons/fa";
 
 const Ayah = () => {
   const [ayah, setAyah] = useState({
-    loader: true,
+    loader: false,
     content: {
       s: 40,
       a: 60,

@@ -16,7 +16,7 @@ const Location = ({ location, tarix, hijri, dd, changeDd }: TLocation) => {
       </button>
       <div className="text-center col-md-5" id="location">
         <h1 className="nowis d-none d-md-block">
-          <Clock time="" />
+          <Clock />
         </h1>
         <h1>{location}</h1>
         <small>{tarix}</small>

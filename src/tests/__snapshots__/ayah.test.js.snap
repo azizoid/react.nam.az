@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`expect to render ayah component 1`] = `
+<blockquote
+  className="ayah"
+>
+  <FaQuoteLeft
+    style={
+      Object {
+        "color": "#66cc66",
+      }
+    }
+  />
+  <cite>
+    40
+     : 
+    60
+  </cite>
+  Rəbbiniz dedi: 'Mənə dua edin, Mən də sizə cavab verim. Həqiqətən, Mənə ibadət etməyə təkəbbür göstərənlər Cəhənnəmə zəlil olaraq girəcəklər'.
+  <a
+    className="link"
+    href="https://quran.az/40#60?rel=namaz"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    <br />
+    <small>
+      Surəni Tam Oxu
+    </small>
+  </a>
+</blockquote>
+`;

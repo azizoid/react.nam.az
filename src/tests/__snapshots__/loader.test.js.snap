@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`expect to render loader component 1`] = `
+<div
+  className="text-center"
+>
+  <div
+    className="lds-facebook"
+  >
+    <div />
+    <div />
+    <div />
+  </div>
+</div>
+`;

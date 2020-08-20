@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`expect to render ayah component 1`] = `
+<div
+  className="row"
+  id="times"
+>
+  <Prayer
+    classes="col-12 col-md-4 alert col-lg-2"
+    current={false}
+    index={0}
+    key="0"
+    prayer={
+      Object {
+        "id": 1,
+        "rakat": 2,
+        "time": "--:--",
+        "title": "Fəcr namazı",
+      }
+    }
+  />
+  <Prayer
+    classes="col-12 col-md-4 alert text-muted col-lg-1"
+    current={false}
+    index={1}
+    key="1"
+    prayer={
+      Object {
+        "id": 2,
+        "rakat": 0,
+        "time": "-:-",
+        "title": "Günəş",
+      }
+    }
+  />
+  <Prayer
+    classes="col-12 col-md-4 alert col-lg-2"
+    current={false}
+    index={2}
+    key="2"
+    prayer={
+      Object {
+        "id": 3,
+        "rakat": 4,
+        "time": "-:-",
+        "title": "Zöhr namazı",
+      }
+    }
+  />
+  <Prayer
+    classes="col-12 col-md-4 alert col-lg-2"
+    current={false}
+    index={3}
+    key="3"
+    prayer={
+      Object {
+        "id": 4,
+        "rakat": 4,
+        "time": "-:-",
+        "title": "Əsr namazı",
+      }
+    }
+  />
+  <Prayer
+    classes="col-12 col-md-4 alert col-lg-2"
+    current={false}
+    index={4}
+    key="4"
+    prayer={
+      Object {
+        "id": 5,
+        "rakat": 3,
+        "time": "-:-",
+        "title": "Məğrib namazı",
+      }
+    }
+  />
+  <Prayer
+    classes="col-12 col-md-4 alert col-lg-2"
+    current={false}
+    index={5}
+    key="5"
+    prayer={
+      Object {
+        "id": 6,
+        "rakat": 4,
+        "time": "-:-",
+        "title": "İşa namazı",
+      }
+    }
+  />
+</div>
+`;
