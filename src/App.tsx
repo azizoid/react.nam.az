@@ -8,6 +8,8 @@ import PrayerList from "./components/prayerlist.component";
 import PrayerListStill from "./components/prayerliststill.component";
 import Ayah from "./components/ayah.component";
 
+import Footer from "./components/footer.component";
+
 import {
   format,
   formatDistanceStrict,
@@ -15,9 +17,10 @@ import {
   differenceInSeconds,
   getDayOfYear,
 } from "date-fns";
-import { az } from "date-fns/locale";
 
-import { cities } from "./assist/cities";
+import az from "date-fns/locale/az";
+
+import cities from "./assist/cities";
 
 const App = () => {
   const newDate = useRef(new Date());
@@ -145,24 +148,7 @@ const App = () => {
         <Ayah />
       </div>
 
-      <footer className="footer">
-        <nav>
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item active">&copy; 2020</li>
-            <li className="breadcrumb-item">
-              <a href="https://www.nam.az">Nam.az</a>
-            </li>
-            <li className="breadcrumb-item">
-              <a href="https://www.quran.az">Quran.az</a>
-            </li>
-            <li className="breadcrumb-item align-right">
-              <small>
-                Namaz Vaxtları: <u>islamicfinder.com</u>
-              </small>
-            </li>
-          </ol>
-        </nav>
-      </footer>
+      <Footer />
     </div>
   );
 };

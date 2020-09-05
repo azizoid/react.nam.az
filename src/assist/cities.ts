@@ -1,4 +1,4 @@
-export const cities = [
+const cities = [
   "Haradasınız?",
   "Bakı",
   "Sumqayıt",
@@ -28,3 +28,4 @@ export const cities = [
   "Bolnisi",
   // "Ərdəbil",
 ];
+export default cities;

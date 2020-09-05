@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Loader from "./loader.component";
-import { FaQuoteLeft } from "react-icons/fa";
+import { MdFormatQuote } from "react-icons/md";
 
 const Ayah = () => {
   const [ayah, setAyah] = useState({
@@ -25,19 +25,13 @@ const Ayah = () => {
     <Loader />
   ) : (
     <blockquote className="ayah">
-      <FaQuoteLeft style={{ color: "#66cc66" }} />
+      <MdFormatQuote style={{ color: "#66cc66" }} />
       <cite>
         {ayah.content.s} : {ayah.content.a}
       </cite>
       {ayah.content.c}
       <a
-        href={
-          "https://quran.az/" +
-          ayah.content.s +
-          "#" +
-          ayah.content.a +
-          "?rel=namaz"
-        }
+        href={`https://quran.az/${ayah.content.s}#${ayah.content.a}?rel=namaz`}
         target="_blank"
         rel="noopener noreferrer"
         className="link"
