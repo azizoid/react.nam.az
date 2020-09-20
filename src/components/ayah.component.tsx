@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Loader from "./loader.component";
+
 import { MdFormatQuote } from "react-icons/md";
 
 const Ayah = () => {
   const [ayah, setAyah] = useState({
-    loader: false,
     content: {
       s: 40,
       a: 60,
@@ -17,13 +16,11 @@ const Ayah = () => {
     fetch("https://quran.az/api/random/1/Namaz")
       .then((response) => response.json())
       .then((data) => {
-        setAyah({ content: data.out[0], loader: false });
+        setAyah({ content: data.out[0] });
       });
   }, []);
 
-  return ayah.loader ? (
-    <Loader />
-  ) : (
+  return (
     <blockquote className="ayah">
       <MdFormatQuote style={{ color: "#66cc66" }} />
       <cite>

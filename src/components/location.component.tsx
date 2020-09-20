@@ -1,6 +1,5 @@
 import React from "react";
 import { TLocation } from "../assist/types";
-// import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import {
   MdNavigateBefore as FaChevronLeft,
   MdNavigateNext as FaChevronRight,

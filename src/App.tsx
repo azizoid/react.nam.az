@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, lazy, Suspense } from "react";
 
 import NavBar from "./components/navbar.component";
 
@@ -6,21 +6,21 @@ import Location from "./components/location.component";
 import Progress from "./components/progress.component";
 import PrayerList from "./components/prayerlist.component";
 import PrayerListStill from "./components/prayerliststill.component";
-import Ayah from "./components/ayah.component";
 
 import Footer from "./components/footer.component";
+import Loader from "./components/loader.component";
 
-import {
-  format,
-  formatDistanceStrict,
-  parse,
-  differenceInSeconds,
-  getDayOfYear,
-} from "date-fns";
+import format from "date-fns/format";
+import formatDistanceStrict from "date-fns/formatDistanceStrict";
+import parse from "date-fns/parse";
+import differenceInSeconds from "date-fns/differenceInSeconds";
+import getDayOfYear from "date-fns/getDayOfYear";
 
 import az from "date-fns/locale/az";
 
 import cities from "./assist/cities";
+
+const Ayah = lazy(() => import("./components/ayah.component"));
 
 const App = () => {
   const newDate = useRef(new Date());
@@ -45,29 +45,31 @@ const App = () => {
   });
 
   const [city, setCity] = useState(
-    JSON.parse(localStorage.getItem("city") as string) || 1
+    JSON.parse(localStorage.getItem("city") as string) || "1"
   );
   const [dd, setDd] = useState(pref.today);
 
   useEffect(() => {
-    let url = "https://nam.az/api/" + city + "/" + dd;
+    let url = `https://nam.az/api/${city}/${dd}`;
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
         let currentPrayer = 5;
 
-        const tmpPrayers = prayers.map((prayer: any, i) => {
-          prayer["time"] = data.prayers[i];
-          prayer["ago"] = formatDistanceStrict(
-            newDate.current,
-            parse(data.prayers[i], "HH:mm", newDate.current),
-            { locale: az, addSuffix: true }
-          );
-          if (data.prayers[i] < pref.nowis) {
-            currentPrayer = i;
-          }
-          return prayer;
-        });
+        setPrayers((prev) =>
+          prev.map((prayer: any, i) => {
+            prayer["time"] = data.prayers[i];
+            prayer["ago"] = formatDistanceStrict(
+              newDate.current,
+              parse(data.prayers[i], "HH:mm", newDate.current),
+              { locale: az, addSuffix: true }
+            );
+            if (data.prayers[i] < pref.nowis) {
+              currentPrayer = i;
+            }
+            return prayer;
+          })
+        );
 
         let progress = 0;
         if (pref.today !== data.dd) {
@@ -75,8 +77,6 @@ const App = () => {
         } else {
           progress = per(currentPrayer, data.prayers, pref.nowis);
         }
-
-        setPrayers([...tmpPrayers]);
 
         setPref((prev) => {
           return {
@@ -90,25 +90,30 @@ const App = () => {
         });
       });
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [city, dd]);
+    // -eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [city, dd]);
+  }, [city, dd, pref.nowis, pref.today]);
 
-  const per = (curr: number, prayers: any, nowis: string): number => {
+  const per = (
+    currentPrayer: number,
+    prayersFromApi: string[],
+    nowis: string
+  ): number => {
     const untillNow = differenceInSeconds(
       parse(nowis, "HH:mm", newDate.current),
-      parse(prayers[curr], "HH:mm", newDate.current)
+      parse(prayersFromApi[currentPrayer], "HH:mm", newDate.current)
     );
 
     let untillNext;
-    if (curr === 5) {
+    if (currentPrayer === 5) {
       untillNext = differenceInSeconds(
         parse("23:59", "HH:mm", newDate.current),
-        parse(prayers[curr], "HH:mm", newDate.current)
+        parse(prayersFromApi[currentPrayer], "HH:mm", newDate.current)
       );
     } else {
       untillNext = differenceInSeconds(
-        parse(prayers[curr++], "HH:mm", newDate.current),
-        parse(prayers[curr], "HH:mm", newDate.current)
+        parse(prayersFromApi[currentPrayer++], "HH:mm", newDate.current),
+        parse(prayersFromApi[currentPrayer], "HH:mm", newDate.current)
       );
     }
 
@@ -145,7 +150,9 @@ const App = () => {
           <PrayerListStill prayers={prayers} />
         )}
 
-        <Ayah />
+        <Suspense fallback={<Loader />}>
+          <Ayah />
+        </Suspense>
       </div>
 
       <Footer />

@@ -1,3 +1,11 @@
+export type TPrayers = {
+  id: number;
+  title: string;
+  time: string;
+  rakat: number;
+  ago: string;
+}
+
 export type TPrayer = {
   prayer: { time: string; title: string; ago: string };
   classes: string;
@@ -24,7 +32,7 @@ export type TLocation = {
   tarix: string;
   hijri: string;
   dd: number;
-  changeDd: (dd: number) => void;
+  changeDd: (dd: number) => (void);
 };
 
 export type TClock = {};
