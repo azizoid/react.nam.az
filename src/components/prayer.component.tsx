@@ -1,8 +1,8 @@
 import React from "react";
-import { TPrayer } from "../assist/types";
+import { TPrayerContainer } from "../assist/types";
 import { MdBrightness7 } from "react-icons/md";
 
-const Prayer = ({ prayer, classes, current, index }: TPrayer) => (
+const Prayer = ({ prayer, classes, current, index }: TPrayerContainer) => (
   <div className={classes}>
     <div className="row">
       <h6 className="col-7 col-md-12 align-self-center">{prayer.title}</h6>

@@ -10,6 +10,7 @@ import PrayerListStill from "./components/prayerliststill.component";
 import Footer from "./components/footer.component";
 import Loader from "./components/loader.component";
 
+/* Date Fns Imports */
 import format from "date-fns/format";
 import formatDistanceStrict from "date-fns/formatDistanceStrict";
 import parse from "date-fns/parse";
@@ -19,6 +20,7 @@ import getDayOfYear from "date-fns/getDayOfYear";
 import az from "date-fns/locale/az";
 
 import cities from "./assist/cities";
+import { TPrayer } from "./assist/types";
 
 const Ayah = lazy(() => import("./components/ayah.component"));
 
@@ -26,12 +28,12 @@ const App = () => {
   const newDate = useRef(new Date());
 
   const [prayers, setPrayers] = useState([
-    { id: 1, title: "Fəcr namazı", time: "--:--", rakat: 2 },
-    { id: 2, title: "Günəş", time: "-:-", rakat: 0 },
-    { id: 3, title: "Zöhr namazı", time: "-:-", rakat: 4 },
-    { id: 4, title: "Əsr namazı", time: "-:-", rakat: 4 },
-    { id: 5, title: "Məğrib namazı", time: "-:-", rakat: 3 },
-    { id: 6, title: "İşa namazı", time: "-:-", rakat: 4 },
+    { id: 1, time: "-:-", rakat: 2, ago: "", title: "Fəcr namazı" },
+    { id: 2, time: "-:-", rakat: 0, ago: "", title: "Günəş" },
+    { id: 3, time: "-:-", rakat: 4, ago: "", title: "Zöhr namazı" },
+    { id: 4, time: "-:-", rakat: 4, ago: "", title: "Əsr namazı" },
+    { id: 5, time: "-:-", rakat: 3, ago: "", title: "Məğrib namazı" },
+    { id: 6, time: "-:-", rakat: 4, ago: "", title: "İşa namazı" },
   ]);
 
   const [pref, setPref] = useState({
@@ -57,7 +59,7 @@ const App = () => {
         let currentPrayer = 5;
 
         setPrayers((prev) =>
-          prev.map((prayer: any, i) => {
+          prev.map((prayer: TPrayer, i) => {
             prayer["time"] = data.prayers[i];
             prayer["ago"] = formatDistanceStrict(
               newDate.current,
@@ -78,16 +80,14 @@ const App = () => {
           progress = per(currentPrayer, data.prayers, pref.nowis);
         }
 
-        setPref((prev) => {
-          return {
-            ...prev,
-            progress: progress,
-            currentPrayer: currentPrayer,
-            location: cities[city],
-            tarix: data.tarix,
-            hijri: data.hijri,
-          };
-        });
+        setPref((prev) => ({
+          ...prev,
+          progress: progress,
+          currentPrayer: currentPrayer,
+          location: cities[city],
+          tarix: data.tarix,
+          hijri: data.hijri,
+        }));
       });
 
     // -eslint-disable-next-line react-hooks/exhaustive-deps
