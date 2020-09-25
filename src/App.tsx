@@ -35,6 +35,7 @@ const App = () => {
     { id: 5, time: "-:-", rakat: 3, ago: "", title: "Məğrib namazı" },
     { id: 6, time: "-:-", rakat: 4, ago: "", title: "İşa namazı" },
   ]);
+  //
 
   const [pref, setPref] = useState({
     location: "Bakı",
