@@ -6,9 +6,9 @@ name: CI
 # events but only for the TypeScript branch
 on:
   push:
-    branches: [ TypeScript ]
+    branches: [TypeScript]
   pull_request:
-    branches: [ TypeScript ]
+    branches: [TypeScript]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 
@@ -33,5 +33,5 @@ jobs:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: eu-central-1
-          function_name: aws-chat-randy
+          function_name: github
           zip_file: bundle.zip
