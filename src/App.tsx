@@ -52,46 +52,46 @@ const App = () => {
   const [dd, setDd] = useState(pref.today);
 
   useEffect(() => {
-    let url = `https://nam.az/api/${city}/${dd}`;
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        let currentPrayer = 5;
+    async function fetchData() {
+      let url = `https://nam.az/api/${city}/${dd}`;
+      await fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          let currentPrayer = 5;
 
-        setPrayers((prev) =>
-          prev.map((prayer: TPrayer, i) => {
-            prayer["time"] = data.prayers[i];
-            prayer["ago"] = formatDistanceStrict(
-              newDate.current,
-              parse(data.prayers[i], "HH:mm", newDate.current),
-              { locale: az, addSuffix: true }
-            );
-            if (data.prayers[i] < pref.nowis) {
-              currentPrayer = i;
-            }
-            return prayer;
-          })
-        );
+          setPrayers((prev) =>
+            prev.map((prayer: TPrayer, i) => {
+              prayer["time"] = data.prayers[i];
+              prayer["ago"] = formatDistanceStrict(
+                newDate.current,
+                parse(data.prayers[i], "HH:mm", newDate.current),
+                { locale: az, addSuffix: true }
+              );
+              if (data.prayers[i] < pref.nowis) {
+                currentPrayer = i;
+              }
+              return prayer;
+            })
+          );
 
-        let progress = 0;
-        if (pref.today !== data.dd) {
-          currentPrayer = -1;
-        } else {
-          progress = per(currentPrayer, data.prayers, pref.nowis);
-        }
+          let progress = 0;
+          if (pref.today !== data.dd) {
+            currentPrayer = -1;
+          } else {
+            progress = per(currentPrayer, data.prayers, pref.nowis);
+          }
 
-        setPref((prev) => ({
-          ...prev,
-          progress: progress,
-          currentPrayer: currentPrayer,
-          location: cities[city],
-          tarix: data.tarix,
-          hijri: data.hijri,
-        }));
-      });
-
-    // -eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [city, dd]);
+          setPref((prev) => ({
+            ...prev,
+            progress: progress,
+            currentPrayer: currentPrayer,
+            location: cities[city],
+            tarix: data.tarix,
+            hijri: data.hijri,
+          }));
+        });
+    }
+    fetchData();
   }, [city, dd, pref.nowis, pref.today]);
 
   const per = (

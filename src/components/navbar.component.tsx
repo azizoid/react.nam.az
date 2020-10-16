@@ -16,6 +16,9 @@ const NavBar = ({ changeCity, city }: TNavBar) => (
         />
         Nam.az
       </a>
+      <button className="btn btn-warning" onClick={() => changeCity(24)}>
+        Xankəndi
+      </button>
 
       <div>
         <ul className="navbar-nav">
