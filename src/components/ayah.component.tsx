@@ -13,10 +13,10 @@ const Ayah = () => {
   });
 
   useEffect(() => {
-    fetch("https://quran.az/api/random/1/Namaz")
+    fetch("https://quran.az/api/random/")
       .then((response) => response.json())
       .then((data) => {
-        setAyah({ content: data.out[0] });
+        setAyah({ content: data.out });
       });
   }, []);
 
