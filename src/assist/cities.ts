@@ -23,7 +23,7 @@ const cities = [
   "Xaçmaz",
   "Yevlax",
   "Zaqatala",
-  "Xankəndi",
+  "Şuşa",
   "Marneuli",
   "Bolnisi",
   // "Ərdəbil",

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, lazy, Suspense } from "react";
 
 import NavBar from "./components/navbar.component";
+import Ramadan from "./components/ramadan.component";
 
 import Location from "./components/location.component";
 import Progress from "./components/progress.component";
@@ -42,8 +43,9 @@ const App = () => {
     nowis: format(newDate.current, "HH:mm"),
     tarix: format(newDate.current, "EEEE, d MMMM yyyy", { locale: az }),
     hijri: "",
-    today: getDayOfYear(newDate.current),
+    today: getDayOfYear(newDate.current)+1,
     progress: 0,
+    ramadan:0
   });
 
   const [city, setCity] = useState(
@@ -59,7 +61,7 @@ const App = () => {
         .then((data) => {
           let currentPrayer = 5;
 
-          setPrayers((prev) =>
+          setPrayers((prev) => 
             prev.map((prayer: TPrayer, i) => {
               prayer["time"] = data.prayers[i];
               prayer["ago"] = formatDistanceStrict(
@@ -88,6 +90,7 @@ const App = () => {
             location: cities[city],
             tarix: data.tarix,
             hijri: data.hijri,
+            ramadan:data.dd-103
           }));
         });
     }
@@ -133,6 +136,8 @@ const App = () => {
   return (
     <div>
       <NavBar changeCity={changeCity} city={city} />
+
+      <Ramadan day={pref.ramadan} />
 
       <div className="container">
         <Location

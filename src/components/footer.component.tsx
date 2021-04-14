@@ -4,7 +4,7 @@ const Footer = () => (
   <div className="footer">
     <nav>
       <ol className="breadcrumb justify-content-center">
-        <li className="breadcrumb-item active">&copy; 2020</li>
+        <li className="breadcrumb-item active">&copy; 2021</li>
         <li className="breadcrumb-item">
           <a href="https://www.nam.az">Nam.az</a>
         </li>
