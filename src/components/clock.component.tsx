@@ -1,35 +1,30 @@
-import React from "react";
-import { TClock, TClockState } from "../assist/types";
+import React, { useState, useEffect } from 'react';
 
-class Clock extends React.Component<TClock, TClockState> {
-  constructor(props: TClock) {
-    super(props);
-    this.state = {
-      time: new Date().toLocaleTimeString("az", {
-        timeZone: "Asia/Baku",
-        hour12: false,
-      }),
+const Clock = () =>{
+  const [date, setDate] = useState(new Date().toLocaleTimeString("az", {
+    timeZone: "Asia/Baku",
+    hour12: false,
+  }));
+
+ useEffect(() => {
+  let timerID = setInterval( () => tick(), 1000 );
+
+  return function cleanup() {
+      clearInterval(timerID);
     };
-  }
-  private intervalID: any;
+ });
 
-  componentDidMount() {
-    this.intervalID = setInterval(() => this.tick(), 1000);
-  }
-  componentWillUnmount() {
-    clearInterval(this.intervalID);
-  }
-  tick() {
-    this.setState({
-      time: new Date().toLocaleTimeString("az", {
+   function tick() {
+    setDate(
+      new Date().toLocaleTimeString("az", {
         timeZone: "Asia/Baku",
         hour12: false,
-      }),
-    });
-  }
-  render() {
-    return <p className="App-clock">{this.state.time}</p>;
-  }
+      })
+    );
+   }
+
+   return <p className="App-clock">{date}</p>
+   
 }
 
-export default Clock;
+export default Clock

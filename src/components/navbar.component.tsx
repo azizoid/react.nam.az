@@ -16,15 +16,13 @@ const NavBar = ({ changeCity, city }: TNavBar) => (
         />
         Nam.az
       </a>
-      {/* <button className="btn btn-warning" onClick={() => changeCity(24)}>
-        Şuşa
-      </button> */}
 
       <div>
         <ul className="navbar-nav">
           <li className="nav-item active">
             <select
-              className="form-control btn-outline-success"
+              className="form-select btn-outline-success"
+              aria-label="Haradasınız?"
               onChange={(e) => changeCity(Number(e.target.value))}
               value={city}
             >
@@ -36,7 +34,7 @@ const NavBar = ({ changeCity, city }: TNavBar) => (
                 );
               })}
             </select>
-            <small>Bakı, Gəncə, Şuşa və digər</small>
+            <small>Bakı, Gəncə, <u>Şuşa</u> və digər</small>
           </li>
         </ul>
       </div>

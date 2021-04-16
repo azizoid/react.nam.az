@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, lazy, Suspense } from "react";
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
 
 import NavBar from "./components/navbar.component";
 import Ramadan from "./components/ramadan.component";
@@ -12,12 +12,13 @@ import Footer from "./components/footer.component";
 import Loader from "./components/loader.component";
 
 /* Date Fns Imports */
-import format from "date-fns/format";
-import formatDistanceStrict from "date-fns/formatDistanceStrict";
-import parse from "date-fns/parse";
-import differenceInSeconds from "date-fns/differenceInSeconds";
-import getDayOfYear from "date-fns/getDayOfYear";
+// import format from "date-fns/format";
+// import formatDistanceStrict from "date-fns/formatDistanceStrict";
+// import parse from "date-fns/parse";
+// import differenceInSeconds from "date-fns/differenceInSeconds";
+// import getDayOfYear from "date-fns/getDayOfYear";
 
+import {format, formatDistanceStrict, parse, differenceInSeconds, getDayOfYear} from "date-fns"
 import az from "date-fns/locale/az";
 
 import cities from "./assist/cities";
@@ -29,7 +30,7 @@ const App = () => {
   const newDate = useRef(new Date());
 
   const [prayers, setPrayers] = useState([
-    { id: 1, time: "-:-", rakat: 2, ago: "", title: "Fəcr namazı" },
+    { id: 1, time: "-:-", rakat: 2, ago: "", title: "Sübh namazı" },
     { id: 2, time: "-:-", rakat: 0, ago: "", title: "Günəş" },
     { id: 3, time: "-:-", rakat: 4, ago: "", title: "Zöhr namazı" },
     { id: 4, time: "-:-", rakat: 4, ago: "", title: "Əsr namazı" },

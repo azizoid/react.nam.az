@@ -18,7 +18,7 @@ const Prayer = ({ prayer, classes, current, index }: TPrayerContainer) => (
           )
         ) : (
           <div className="col-12 text-center">
-            <span className="badge badge-warning">
+            <span className="badge bg-warning text-dark">
               Zaman varkən <br />
               Namazını qıl
             </span>
