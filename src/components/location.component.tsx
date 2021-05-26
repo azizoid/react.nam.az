@@ -1,8 +1,7 @@
-import React from "react";
 import { TLocation } from "../assist/types";
 import {
-  MdNavigateBefore as FaChevronLeft,
-  MdNavigateNext as FaChevronRight,
+  MdNavigateBefore,
+  MdNavigateNext,
 } from "react-icons/md";
 
 import Clock from "./clock.component";
@@ -14,7 +13,7 @@ const Location = ({ location, tarix, hijri, dd, changeDd }: TLocation) => (
       style={{ fontSize: "3em", color: "#6cb2eb" }}
       onClick={() => changeDd(dd - 1)}
     >
-      <FaChevronLeft />
+      <MdNavigateBefore />
     </button>
     <div className="text-center col-md-5" id="location">
       <h1 className="nowis d-none d-md-block">
@@ -30,7 +29,7 @@ const Location = ({ location, tarix, hijri, dd, changeDd }: TLocation) => (
       style={{ fontSize: "3em", color: "#6cb2eb" }}
       onClick={() => changeDd(dd + 1)}
     >
-      <FaChevronRight />
+      <MdNavigateNext />
     </button>
   </div>
 );

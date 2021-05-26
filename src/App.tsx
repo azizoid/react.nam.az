@@ -3,7 +3,7 @@ import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import NavBar from "./components/navbar.component";
 import Ramadan from "./components/ramadan.component";
 
-import Location from "./components/location.component";
+// import Location from "./components/location.component";
 import Progress from "./components/progress.component";
 import PrayerList from "./components/prayerlist.component";
 import PrayerListStill from "./components/prayerliststill.component";
@@ -18,16 +18,24 @@ import Loader from "./components/loader.component";
 // import differenceInSeconds from "date-fns/differenceInSeconds";
 // import getDayOfYear from "date-fns/getDayOfYear";
 
-import {format, formatDistanceStrict, parse, differenceInSeconds, getDayOfYear} from "date-fns"
+import {
+  format,
+  formatDistanceStrict,
+  parse,
+  differenceInSeconds,
+  getDayOfYear,
+} from "date-fns";
 import az from "date-fns/locale/az";
 
 import cities from "./assist/cities";
 import { TPrayer } from "./assist/types";
 
+const Location = lazy(() => import("./components/location.component"));
 const Ayah = lazy(() => import("./components/ayah.component"));
 
 const App = () => {
   const newDate = useRef(new Date());
+  const today = getDayOfYear(newDate.current) + 1;
 
   const [prayers, setPrayers] = useState([
     { id: 1, time: "-:-", rakat: 2, ago: "", title: "Sübh namazı" },
@@ -44,25 +52,25 @@ const App = () => {
     nowis: format(newDate.current, "HH:mm"),
     tarix: format(newDate.current, "EEEE, d MMMM yyyy", { locale: az }),
     hijri: "",
-    today: getDayOfYear(newDate.current)+1,
+    today: today,
     progress: 0,
-    ramadan:0
+    ramadan: 0,
   });
 
   const [city, setCity] = useState(
     JSON.parse(localStorage.getItem("city") as string) || "1"
   );
-  const [dd, setDd] = useState(pref.today);
+  const [dd, setDd] = useState(today);
 
   useEffect(() => {
-    async function fetchData() {
+    const fetchData = async () => {
       let url = `https://nam.az/api/${city}/${dd}`;
       await fetch(url)
         .then((response) => response.json())
         .then((data) => {
           let currentPrayer = 5;
 
-          setPrayers((prev) => 
+          setPrayers((prev) =>
             prev.map((prayer: TPrayer, i) => {
               prayer["time"] = data.prayers[i];
               prayer["ago"] = formatDistanceStrict(
@@ -81,7 +89,11 @@ const App = () => {
           if (pref.today !== data.dd) {
             currentPrayer = -1;
           } else {
-            progress = per(currentPrayer, data.prayers, pref.nowis);
+            progress = percentageCounter(
+              currentPrayer,
+              data.prayers,
+              pref.nowis
+            );
           }
 
           setPref((prev) => ({
@@ -91,14 +103,14 @@ const App = () => {
             location: cities[city],
             tarix: data.tarix,
             hijri: data.hijri,
-            ramadan:data.dd-103
+            ramadan: data.dd - 103,
           }));
         });
-    }
+    };
     fetchData();
   }, [city, dd, pref.nowis, pref.today]);
 
-  const per = (
+  const percentageCounter = (
     currentPrayer: number,
     prayersFromApi: string[],
     nowis: string
@@ -140,15 +152,17 @@ const App = () => {
 
       <Ramadan day={pref.ramadan} />
 
-      <div className="container">
-        <Location
-          location={pref.location}
-          tarix={pref.tarix}
-          hijri={pref.hijri}
-          dd={dd}
-          changeDd={(v: number) => setDd(v)}
-        />
-        <Progress bar={pref.progress} />
+      <div className='container locationBlock'>
+        <Suspense fallback={<Loader />}>
+          <Location
+            location={pref.location}
+            tarix={pref.tarix}
+            hijri={pref.hijri}
+            dd={dd}
+            changeDd={(v: number) => setDd(v)}
+          />
+          <Progress bar={pref.progress} />
+        </Suspense>
 
         {pref.today === dd ? (
           <PrayerList prayers={prayers} currentPrayer={pref.currentPrayer} />

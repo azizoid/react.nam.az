@@ -1,4 +1,3 @@
-import React from "react";
 import { TProgress } from "../assist/types";
 
 const Progress = ({ bar }: TProgress) => {

@@ -1,4 +1,3 @@
-import React from "react";
 import { TPrayerList } from "../assist/types";
 
 import { MdBrightness7 } from "react-icons/md";

@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import { MdFormatQuote } from "react-icons/md";
+
+import "../styles/ayah.styles.css"
 
 const Ayah = () => {
   const [ayah, setAyah] = useState({
@@ -12,12 +14,15 @@ const Ayah = () => {
     },
   });
 
-  useEffect(() => {
-    fetch("https://quran.az/api/random/")
-      .then((response) => response.json())
-      .then((data) => {
-        setAyah({ content: data.out });
-      });
+  useEffect( () => {
+    const fetchAyah = () => {
+      fetch("https://quran.az/api/random/")
+        .then((response) => response.json())
+        .then((data) => {
+          setAyah({ content: data.out });
+        });
+    }
+    fetchAyah();
   }, []);
 
   return (
